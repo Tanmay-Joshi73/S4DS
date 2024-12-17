@@ -37,7 +37,7 @@ const AboutStanfordAIClub = () => {
         <div>
           <h2 className="text-5xl font-bold text-black dark:text-gray-800 mb-6">About S4DS AI Club</h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            The Stanford AI Club (SAIC) is the premier AI club at Stanford. We are dedicated to fostering an inclusive and vibrant community for students interested in artificial intelligence. We aim to provide all students from established AI researchers to folks wanting to get into the field with the knowledge and opportunity to engage with AI research & development. Our vision is to serve as a centralized hub for the AI community on campus, connecting everyone from domain experts and practitioners to theorists.
+            The S4DS Club (S4DS) is the premier AI club at Dy Patil Akurdi. We are dedicated to fostering an inclusive and vibrant community for students interested in artificial intelligence. We aim to provide all students from established AI researchers to folks wanting to get into the field with the knowledge and opportunity to engage with AI research & development. Our vision is to serve as a centralized hub for the AI community on campus, connecting everyone from domain experts and practitioners to theorists.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
             We offer a wide range of activities such as student-led research projects, reading groups, workshops, and classes designed to equip members with essential AI skills.
@@ -259,7 +259,7 @@ const AIDataScienceClubWebsite = () => {
       {/* Project section   */}
       {/* <Projects /> */}
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container bg-white mx-auto px-4 py-16 relative z-10">
         {/* Contact Section */}
         <section className="mb-16">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-100 animate-fadeInUp">
