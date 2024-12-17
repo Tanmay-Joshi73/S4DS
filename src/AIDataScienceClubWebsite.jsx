@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import chatbotImage from './assets/ai-chatbot.webp';
 import SpamEmail from "./assets/Spam-Email-Classfier.webp"
+import ironMAN from "./assets/Iron-MAN.mp4"
+import sitting from "./assets/sitting-NoBG.gif"
+import Random from "./assets/random.mp4"
+import eating from "./assets/eating.mp4"
+import skeleton from "./assets/skeleton.mp4"
+import Animation from "./assets/animation.mp4"
+// import sample from "./assets/sample.mp4"
 import "./index.css"
 import { 
   Code, Database, Brain, Cpu, 
@@ -22,6 +29,42 @@ const ThemeToggle = ({ isDarkMode, toggleTheme }) => (
     )}
   </button>
 );
+// About the introduction
+const AboutStanfordAIClub = () => {
+  return (
+    <section className="bg-white py-16 px-8 md:px-16">
+      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div>
+          <h2 className="text-5xl font-bold text-black dark:text-gray-800 mb-6">About S4DS AI Club</h2>
+          <p className="text-gray-600 text-lg leading-relaxed mb-4">
+            The Stanford AI Club (SAIC) is the premier AI club at Stanford. We are dedicated to fostering an inclusive and vibrant community for students interested in artificial intelligence. We aim to provide all students from established AI researchers to folks wanting to get into the field with the knowledge and opportunity to engage with AI research & development. Our vision is to serve as a centralized hub for the AI community on campus, connecting everyone from domain experts and practitioners to theorists.
+          </p>
+          <p className="text-gray-600 text-lg leading-relaxed mb-4">
+            We offer a wide range of activities such as student-led research projects, reading groups, workshops, and classes designed to equip members with essential AI skills.
+          </p>
+          <p className="text-gray-600 text-lg leading-relaxed mb-4">
+            We also engage with non-profit organizations with the shared vision of democratizing AI and reducing global inequalities. By hosting small-group discussions and lectures with leading experts like Sam Altman, the club provides invaluable networking and learning opportunities for students passionate about AI.
+          </p>
+        </div>
+        <div className="flex items-center justify-center">
+          <video
+            className="w-full rounded-lg shadow-lg"
+            muted
+            loop
+            autoPlay
+            poster="https://via.placeholder.com/400x300"
+          >
+            <source src={Animation} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+
 
 // Featured Highlights
 const FeaturedHighlights = () => {
@@ -206,6 +249,9 @@ const AIDataScienceClubWebsite = () => {
     </p>
   </div>
 </header>
+
+        {/* About Yourself Component */}
+        <AboutStanfordAIClub />
 
       {/* Featured Highlights */}
       <FeaturedHighlights />
