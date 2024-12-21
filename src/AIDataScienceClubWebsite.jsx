@@ -17,18 +17,18 @@ import {
 } from 'lucide-react';
 
 // Theme Toggle Component
-const ThemeToggle = ({ isDarkMode, toggleTheme }) => (
-  <button 
-    onClick={toggleTheme} 
-    className="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:rotate-12"
-  >
-    {isDarkMode ? (
-      <Sun className="w-6 h-6 text-yellow-500" />
-    ) : (
-      <Moon className="w-6 h-6 text-indigo-600" />
-    )}
-  </button>
-);
+// const ThemeToggle = ({ isDarkMode, toggleTheme }) => (
+//   <button 
+//     onClick={toggleTheme} 
+//     className="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:rotate-12"
+//   >
+//     {isDarkMode ? (
+//       <Sun className="w-6 h-6 text-yellow-500" />
+//     ) : (
+//       <Moon className="w-6 h-6 text-indigo-600" />
+//     )}
+//   </button>
+// );
 // About the introduction
 const AboutStanfordAIClub = () => {
   return (
@@ -43,7 +43,7 @@ const AboutStanfordAIClub = () => {
             We offer a wide range of activities such as student-led research projects, reading groups, workshops, and classes designed to equip members with essential AI skills.
           </p>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            We also engage with non-profit organizations with the shared vision of democratizing AI and reducing global inequalities. By hosting small-group discussions and lectures with leading experts like Sam Altman, the club provides invaluable networking and learning opportunities for students passionate about AI.
+            We also engage with non-profit organizations with the shared vision of democratizing AI and reducing global inequalities. By hosting small-group discussions and lectures with leading experts , the club provides invaluable networking and learning opportunities for students passionate about AI.
           </p>
         </div>
         <div className="flex items-center justify-center">
@@ -213,6 +213,65 @@ const Projects = () => {
     </section>
   );
 };
+// Nav bar
+const Navigation = () => {
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent py-4">
+      <div className="container mx-auto px-8">
+        <div className="flex items-center justify-end">
+          <div className="hidden md:flex items-center space-x-8">
+            {/* <a
+              href="#home"
+              className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Home
+            </a> */}
+            <a
+              href="/resources"
+              className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Resources
+            </a>
+            <a
+              href="/"
+              className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Playground
+            </a>
+            <a
+              href="#projects"
+              className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Projects
+            </a>
+            <a
+              href="#contact"
+              className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Contact
+            </a>
+          </div>
+          {/* Mobile menu button */}
+          <button className="md:hidden text-white">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
 
 
@@ -235,20 +294,25 @@ const AIDataScienceClubWebsite = () => {
   return (
     <div className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-gray-100' : 'bg-gradient-to-br from-gray-50 to-gray-100'} font-sans transition-colors duration-300`}>
       {/* Theme Toggle */}
-      <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      {/* <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} /> */}
+      
 
-      {/* Header with Glowing Effect */}
-      <header className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-700 text-white py-28 text-center overflow-hidden w-full max-w-full px-6 min-h-[80vh]">
+
+
+      {/* Header with Glowing Effect  Header section */}
+      <header className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-700 text-white min-h-screen flex items-center justify-center text-center overflow-hidden w-full max-w-full px-8">
+  <Navigation />
   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-70 blur-3xl animate-pulse"></div>
-  <div className="relative z-20 max-w-6xl mx-auto">
-    <h1 className="text-7xl font-extrabold mb-4 mt-12 animate-fadeInUp text-white drop-shadow-lg">
+  <div className="relative z-20 max-w-7xl mx-auto flex flex-col items-center justify-center">
+    <h1 className="text-6xl lg:text-7xl font-extrabold mb-6 animate-fadeInUp text-white drop-shadow-lg">
       AI & Data Science Club
     </h1>
-    <p className="text-3xl max-w-5xl mt-8 mx-auto animate-fadeInUp delay-200 text-gray-100">
+    <p className="text-2xl lg:text-3xl max-w-4xl mx-auto animate-fadeInUp delay-200 text-gray-100 leading-relaxed">
       Pioneering the future of technology through innovative artificial intelligence and data-driven solutions
     </p>
   </div>
 </header>
+
 
         {/* About Yourself Component */}
         <AboutStanfordAIClub />
