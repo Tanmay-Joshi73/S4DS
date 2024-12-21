@@ -215,17 +215,15 @@ const Projects = () => {
 };
 // Nav bar
 const Navigation = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent py-4">
       <div className="container mx-auto px-8">
         <div className="flex items-center justify-end">
           <div className="hidden md:flex items-center space-x-8">
-            {/* <a
-              href="#home"
-              className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
-            >
-              Home
-            </a> */}
             <a
               href="/resources"
               className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
@@ -251,8 +249,12 @@ const Navigation = () => {
               Contact
             </a>
           </div>
+
           {/* Mobile menu button */}
-          <button className="md:hidden text-white">
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-white p-2 rounded-lg focus:outline-none"
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -267,6 +269,66 @@ const Navigation = () => {
               />
             </svg>
           </button>
+        </div>
+
+        {/* Mobile Menu with improved styling */}
+        <div 
+          className={`
+            fixed inset-0 bg-black bg-opacity-90 backdrop-blur-sm md:hidden
+            transition-opacity duration-300 ease-in-out
+            ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+          `}
+        >
+          <div className={`
+            flex flex-col items-center justify-center h-full space-y-8
+            transform transition-transform duration-300
+            ${isMenuOpen ? "translate-x-0" : "translate-x-full"}
+          `}>
+            {/* Close button */}
+            <button
+              onClick={toggleMenu}
+              className="absolute top-6 right-8 text-white p-2"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            <a
+              href="/resources"
+              className="text-white text-3xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Resources
+            </a>
+            <a
+              href="/"
+              className="text-white text-3xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Playground
+            </a>
+            <a
+              href="#projects"
+              className="text-white text-3xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Projects
+            </a>
+            <a
+              href="#contact"
+              className="text-white text-3xl hover:text-blue-200 transition-colors duration-300"
+            >
+              Contact
+            </a>
+          </div>
         </div>
       </div>
     </nav>
