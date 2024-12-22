@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { BookOpen, Code, ChevronRight } from 'lucide-react';
 
 const Basic = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-16">
+      <div className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white py-20">
         <div className="container mx-auto px-6">
           <div className="flex items-center space-x-2 text-sm mb-4">
             <a href="/resources" className="hover:text-emerald-200">Resources</a>

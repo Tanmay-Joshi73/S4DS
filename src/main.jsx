@@ -1,12 +1,17 @@
 import React from 'react';
+import { Suspense ,lazy} from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Use react-router-dom
 import './index.css';
 import App from './App.jsx';
-import Basic from './Basic/Basic.jsx';
+// import Basic from './Basic/Basic.jsx';
  // Ensure this is the correct import path
-import ResourcesPage from './ResourcesPage.jsx'; // Ensure this path is correct
-import Data_Analysis from './Basic/Data_Analysis.jsx';
+// import ResourcesPage from './ResourcesPage.jsx'; // Ensure this path is correct
+const ResourcesPage=lazy(()=>import('./ResourcesPage.jsx'))
+const Basic=lazy(()=>import('./Basic/Basic.jsx'))
+const Data_Analysis=lazy(()=>import('./Basic/Data_Analysis.jsx'))
+// import Data_Analysis from './Basic/Data_Analysis.jsx';
+import { LayoutTemplate } from 'lucide-react';
 // Get the root element from your HTML
 const root = document.getElementById('root');
 
@@ -14,12 +19,14 @@ const root = document.getElementById('root');
 createRoot(root).render(
   <React.StrictMode>
     <BrowserRouter>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/resources/basic" element={<Basic />} />
         <Route path="/resources/Data_Analysis" element={<Data_Analysis />} />
       </Routes>
+    </Suspense>
     </BrowserRouter>
   </React.StrictMode>
 );
