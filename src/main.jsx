@@ -7,6 +7,7 @@ import App from './App.jsx';
 // import Basic from './Basic/Basic.jsx';
  // Ensure this is the correct import path
 // import ResourcesPage from './ResourcesPage.jsx'; // Ensure this path is correct
+const MachineLearning_Page=lazy(()=> import('./Basic/MachineLearning.jsx'))
 const ResourcesPage=lazy(()=>import('./ResourcesPage.jsx'))
 const Basic=lazy(()=>import('./Basic/Basic.jsx'))
 const Data_Analysis=lazy(()=>import('./Basic/Data_Analysis.jsx'))
@@ -25,6 +26,7 @@ createRoot(root).render(
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/resources/basic" element={<Basic />} />
         <Route path="/resources/Data_Analysis" element={<Data_Analysis />} />
+        <Route path='/resources/MachineLearning' element={<MachineLearning_Page/>}/>
       </Routes>
     </Suspense>
     </BrowserRouter>
