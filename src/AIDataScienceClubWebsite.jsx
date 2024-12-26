@@ -7,28 +7,16 @@ import Random from "./assets/random.mp4"
 import eating from "./assets/eating.mp4"
 import skeleton from "./assets/skeleton.mp4"
 import Animation from "./assets/animation.mp4"
+import PowerBI from "./assets/PowerBI.webp"
 // import sample from "./assets/sample.mp4"
 import "./index.css"
 import { 
   Code, Database, Brain, Cpu, 
   TrendingUp, Users, Book, GitBranch, 
   Award, Target, Zap, Server, 
-  Rocket, Terminal, Globe, Moon, Sun, Mail, Phone, MapPin ,Github,Eye
-} from 'lucide-react';
+  Rocket, Terminal, Globe, Moon, Sun, Mail, Phone, MapPin ,Github,Eye,
+ Trophy, Star, Crown ,Instagram} from 'lucide-react';
 
-// Theme Toggle Component
-// const ThemeToggle = ({ isDarkMode, toggleTheme }) => (
-//   <button 
-//     onClick={toggleTheme} 
-//     className="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:rotate-12"
-//   >
-//     {isDarkMode ? (
-//       <Sun className="w-6 h-6 text-yellow-500" />
-//     ) : (
-//       <Moon className="w-6 h-6 text-indigo-600" />
-//     )}
-//   </button>
-// );
 // About the introduction
 const AboutStanfordAIClub = () => {
   return (
@@ -336,6 +324,106 @@ const Navigation = () => {
 };
 
 
+// Event Section
+
+
+const EventSection = () => {
+  const prizes = [
+    {
+      place: "InAugration",
+      icon: Star,
+      rewards: ["InAugration of AI Club",
+        "Join us for the grand inauguration of our AI Club",
+        " we unveil exciting plans and initiatives for the coming year",
+      "Launch of the AI Club website."]    
+        },
+
+    {
+      place: "AI Hackathon (Upcoming)",
+      icon: Award,
+      rewards: [
+        " A 48-hour coding challenge to create innovative AI applications",
+        " Participants can form teams,",
+        "there will be workshops",
+        "mentoring sessions during the event",
+      ],
+      info: "Celebrate the achievements of our 3rd place winner and learn how they mastered their journey to success."
+    }
+  ];
+
+  return (
+    <div className="min-h-screen text-gray-800 bg-white py-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl md:text-6xl text-5xl font-bold text-black dark:text-gray-800 text-center mb-12">
+          Events
+        </h1>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Container - 1st Place */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
+            <div className="relative bg-gradient-to-br from-blue-900 via-blue-700 to-purple-900 shadow-2xl rounded-3xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+              <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.4),_transparent_70%)]"></div>
+              <div className="p-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <Trophy className="w-10 h-10 text-yellow-400" />
+                  <h2 className="text-4xl font-bold text-white">PowerBI</h2>
+                </div>
+                <ul className="text-gray-200 text-lg space-y-3 mb-8">
+                  {["Efficent Data Visualization", "Seemless Data Integretion", "Real Time Data Streaming","Scalable And Secure"].map((reward, idx) => (
+                    <li key={idx} className="flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-blue-400"></span>
+                      {reward}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-gray-300 text-sm">
+                  {/* Dive deep into advanced analytics with PowerBI and learn how to create impactful visualizations for data-driven decisions. */}
+                </p>
+              </div>
+              <div className="flex justify-center relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent"></div>
+                <img
+                  src={PowerBI}
+                  alt="PowerBI"
+                  className="w-64 h-64 object-cover rounded-full border-4 border-white/20 shadow-2xl transform -translate-y-6 group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Right Container - Other Prizes */}
+          <div className="space-y-5">
+            {prizes.map((prize, index) => {
+              const Icon = prize.icon;
+              return (
+                <div key={index} className="group relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-300 "></div>
+                  <div className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 p-10 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Icon className="w-6 h-6 text-blue-400" />
+                      <h3 className="text-3xl font-bold text-white">{prize.place}</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      {prize.rewards.map((reward, idx) => (
+                        <li key={idx} className="text-gray-200 text-lg  flex items-center gap-2">
+                          <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                          {reward}
+                        </li>
+                      ))}
+                    </ul>
+                    {/* <p className="text-gray-400 text-sm mt-4">{prize.info}</p> */}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 
 // Main App Component
@@ -382,8 +470,9 @@ const AIDataScienceClubWebsite = () => {
       {/* Featured Highlights */}
       <FeaturedHighlights />
 
-      {/* Project section   */}
-      {/* <Projects /> */}
+    {/* Event Section */}
+    <EventSection />
+
       {/* Main Content */}
       <div className="container bg-white mx-auto px-4 py-16 relative z-10">
         {/* Contact Section */}
@@ -438,8 +527,8 @@ const AIDataScienceClubWebsite = () => {
             <a href="#" className="hover:text-blue-400 transition-colors">
               <Mail className="w-6 h-6" />
             </a>
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              <Phone className="w-6 h-6" />
+            <a href="https://www.instagram.com/s4ds_dypcoe/" className="hover:text-blue-400 transition-colors">
+              <Instagram className="w-6 h-6" />
             </a>
             <a href="#" className="hover:text-blue-400 transition-colors">
               <MapPin className="w-6 h-6" />

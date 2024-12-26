@@ -19,8 +19,21 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import machine_learning_img from "../assets/machine-learning-image.webp";
 
+//Data for the labels
+import { ScatterChart, Scatter } from 'recharts';
+
+const labeledDataGraph = [
+  { x: 1, y: 1, label: 'A' },
+  { x: 2, y: 2, label: 'B' },
+  { x: 3, y: 3, label: 'C' },
+  { x: 4, y: 4, label: 'D' },
+  { x: 5, y: 5, label: 'E' },
+];
+import machine_learning_img from "../assets/machine-learning-image.webp";
+import LabelldataImg from "../assets/Labelleddata.webp"
+import Feature from "../assets/FeatureEnginering.jpg"
+import Algorithm from "../assets/algorithm.jpg"
 // Sample data for the ML accuracy graph
 const mlAccuracyData = [
   { name: 'Day 1', training: 65, validation: 60 },
@@ -31,6 +44,23 @@ const mlAccuracyData = [
   { name: 'Day 25', training: 92, validation: 83 },
   { name: 'Day 30', training: 95, validation: 85 },
 ];
+const LabeledDataGraph = () => (
+    <div className="bg-white p-4 rounded-lg shadow-lg">
+      <h3 className="text-lg font-semibold mb-4">Labeled Data Visualization</h3>
+      <div className="h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <ScatterChart>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis type="number" dataKey="x" name="Feature 1" unit=" units" />
+            <YAxis type="number" dataKey="y" name="Label" unit=" units" />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Legend />
+            <Scatter name="Labeled Data" data={labeledDataGraph} fill="#8884d8" />
+          </ScatterChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
 
 const topics = [
   {
@@ -148,83 +178,202 @@ const MachineLearning = () => {
     const colorClass = `border-${topic.color}-500`;
   
     return (
-      <section className="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className={`border-l-4 ${colorClass} p-8`}>
-          <div className="flex items-center mb-4">
-            <topic.icon className={`w-6 h-6 text-${topic.color}-500 mr-2`} />
-            <h2 className="text-2xl font-bold">{topic.title}</h2>
-          </div>
-          <p className="text-gray-600 mb-6">{topic.content.description}</p>
-          
-          {topic.content.features && (
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-              <h4 className="font-semibold text-blue-800 mb-2">Key Features:</h4>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
-                {topic.content.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
+        <section className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className={`border-l-4 ${colorClass} p-8`}>
+            <div className="flex items-center mb-4">
+              <topic.icon className={`w-6 h-6 text-${topic.color}-500 mr-2`} />
+              <h2 className="text-2xl font-bold">{topic.title}</h2>
             </div>
-          )}
-  
-          {topic.content.additionalContent && (
-            <div className="space-y-8">
-              <p className="text-gray-700">{topic.content.additionalContent.detailedDescription}</p>
-              
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="font-semibold mb-4">Key Concepts:</h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-3">
-                  {topic.content.additionalContent.keyConcepts.map((concept, index) => (
-                    <li key={index}>{concept}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="font-semibold">Performance Metrics:</h3>
-                <MLAccuracyGraph />
-              </div>
-
-              {topic.id === 'intro' && (
-                <div className="mt-8">
-                  <h3 className="font-semibold mb-4">Visual Overview:</h3>
-                  <div className="relative rounded-xl overflow-hidden shadow-lg">
-                    <img 
-                      src={machine_learning_img} 
-                      alt="Machine Learning Overview" 
-                      className="w-full object-cover object-center rounded-xl"
-                      style={{ height: '400px' }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  </div>
+            <p className="text-gray-600 mb-6">{topic.content.description}</p>
+    
+            {/* New Section: Labeled Data */}
+            {topic.id === 'supervised' && (
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <h4 className="font-semibold text-blue-800 mb-2">Labeled Data:</h4>
+                <p className="text-gray-700 mb-4">
+                  Labeled data is a dataset where each input (data point) is associated with the correct output (label). In supervised learning, the model is trained using this labeled data to learn the relationship between the input features and the output labels.
+                </p>
+                <div className="relative rounded-xl overflow-hidden shadow-lg">
+                <LabeledDataGraph />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
-              )}
-            </div>
-          )}
-          
-          {topic.content.algorithms && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-3">Key Algorithms:</h3>
+              </div>
+            )}
+    
+            {/* New Section: Feature Engineering */}
+           
+            {topic.id === 'supervised' && (
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <h4 className="font-semibold text-blue-800 mb-2">Feature Engineering:</h4>
+                <p className="text-gray-700 mb-4">
+                  Feature engineering involves selecting and transforming input data to improve model performance. The goal is to extract meaningful features from raw data that help the model make accurate predictions. Feature scaling, normalization, and dimensionality reduction are common techniques used in this process.
+                </p>
+                <div className="relative rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={Feature} 
+                    alt="Feature Engineering Example" 
+                    className="w-full object-cover object-center rounded-xl"
+                    style={{ height: '400px' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                </div>
+              </div>
+            )}
+            {/* {New section for Labels} */}
+            {topic.id === 'supervised' && (
+  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+    <h4 className="font-semibold text-blue-800 mb-2">Labels:</h4>
+    <p className="text-gray-700 mb-4">
+      In supervised learning, labels are the target output that the model aims to predict. For every input data point, there is an associated label that represents the correct output. The model uses these labels during training to learn the mapping between inputs and the correct outputs. Labels are essential for training the model and evaluating its performance.
+    </p>
+    <p className="text-gray-700 mb-4">
+      For example, in a classification problem, the label might be a category (e.g., "cat" or "dog"), while in a regression problem, the label might be a continuous value (e.g., a house price).
+    </p>
+    <div className="relative rounded-xl overflow-hidden shadow-lg">
+      <img 
+        src={LabelldataImg} 
+        alt="Labels Example" 
+        className="w-full object-cover object-center rounded-xl"
+        style={{ height: '400px' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    </div>
+  </div>
+)}
+
+
+    {/* Algorithm */}
+          {topic.id === 'supervised' && (
+  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+    <h4 className="font-semibold text-blue-800 mb-2">Algorithm:</h4>
+    <p className="text-gray-700 mb-4">
+    An algorithm is a finite set of well-defined instructions designed to solve a specific problem or perform a computation. In the context of machine learning, algorithms are the backbone of learning processes, determining how models analyze data and make predictions.
+    </p>
+    <p className="text-gray-700 mb-4">
+      {/* For example, in a classification problem, the label might be a category (e.g., "cat" or "dog"), while in a regression problem, the label might be a continuous value (e.g., a house price). */}
+    </p>
+    <div className="relative rounded-xl overflow-hidden shadow-lg">
+      <img 
+        src={Algorithm} 
+        alt="Algotirhm" 
+        className="w-full object-cover object-center rounded-xl"
+        style={{ height: '400px' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    </div>
+  </div>
+)}
+ {topic.id === 'supervised' && (
+  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+    <h4 className="font-semibold text-blue-800 mb-2">Labels:</h4>
+    <p className="text-gray-700 mb-4">
+      In supervised learning, labels are the target output that the model aims to predict. For every input data point, there is an associated label that represents the correct output. The model uses these labels during training to learn the mapping between inputs and the correct outputs. Labels are essential for training the model and evaluating its performance.
+    </p>
+    <p className="text-gray-700 mb-4">
+      For example, in a classification problem, the label might be a category (e.g., "cat" or "dog"), while in a regression problem, the label might be a continuous value (e.g., a house price).
+    </p>
+    <div className="relative rounded-xl overflow-hidden shadow-lg">
+      <img 
+        src={LabelldataImg} 
+        alt="Labels Example" 
+        className="w-full object-cover object-center rounded-xl"
+        style={{ height: '400px' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    </div>
+  </div>
+)}
+ {topic.id === 'supervised' && (
+  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+    <h4 className="font-semibold text-blue-800 mb-2">Labels:</h4>
+    <p className="text-gray-700 mb-4">
+      In supervised learning, labels are the target output that the model aims to predict. For every input data point, there is an associated label that represents the correct output. The model uses these labels during training to learn the mapping between inputs and the correct outputs. Labels are essential for training the model and evaluating its performance.
+    </p>
+    <p className="text-gray-700 mb-4">
+      For example, in a classification problem, the label might be a category (e.g., "cat" or "dog"), while in a regression problem, the label might be a continuous value (e.g., a house price).
+    </p>
+    <div className="relative rounded-xl overflow-hidden shadow-lg">
+      <img 
+        src={LabelldataImg} 
+        alt="Labels Example" 
+        className="w-full object-cover object-center rounded-xl"
+        style={{ height: '400px' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    </div>
+  </div>
+)}   
+    
+            {/* Existing Content */}
+            {topic.content.features && (
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <h4 className="font-semibold text-blue-800 mb-2">Key Features:</h4>
                 <ul className="list-disc list-inside text-gray-700 space-y-2">
-                  {topic.content.algorithms.map((algorithm, index) => (
-                    <li key={index}>{algorithm}</li>
+                  {topic.content.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
                   ))}
                 </ul>
               </div>
-              {topic.content.code && (
-                <div className="bg-gray-900 rounded-lg p-4">
-                  <code className="text-green-400 whitespace-pre-line">
-                    {topic.content.code}
-                  </code>
+            )}
+    
+            {topic.content.additionalContent && (
+              <div className="space-y-8">
+                <p className="text-gray-700">{topic.content.additionalContent.detailedDescription}</p>
+    
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="font-semibold mb-4">Key Concepts:</h3>
+                  <ul className="list-disc list-inside text-gray-700 space-y-3">
+                    {topic.content.additionalContent.keyConcepts.map((concept, index) => (
+                      <li key={index}>{concept}</li>
+                    ))}
+                  </ul>
                 </div>
-              )}
-            </div>
-          )}
-        </div>
-      </section>
-    );
-  };
+    
+                <div className="space-y-4">
+                  <h3 className="font-semibold">Performance Metrics:</h3>
+                  <MLAccuracyGraph />
+                </div>
+    
+                {topic.id === 'intro' && (
+                  <div className="mt-8">
+                    <h3 className="font-semibold mb-4">Visual Overview:</h3>
+                    <div className="relative rounded-xl overflow-hidden shadow-lg">
+                      <img 
+                        src={machine_learning_img} 
+                        alt="Machine Learning Overview" 
+                        className="w-full object-cover object-center rounded-xl"
+                        style={{ height: '400px' }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {topic.content.algorithms && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                <div>
+                  <h3 className="text-lg font-semibold mb-3">Key Algorithms:</h3>
+                  <ul className="list-disc list-inside text-gray-700 space-y-2">
+                    {topic.content.algorithms.map((algorithm, index) => (
+                      <li key={index}>{algorithm}</li>
+                    ))}
+                  </ul>
+                </div>
+                {topic.content.code && (
+                  <div className="bg-gray-900 rounded-lg p-4">
+                    <code className="text-green-400 whitespace-pre-line">
+                      {topic.content.code}
+                    </code>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    };
 
   return (
     <div className="min-h-screen bg-gray-50">

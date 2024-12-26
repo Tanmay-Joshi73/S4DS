@@ -176,7 +176,7 @@ const Data_Analysis = () => {
             ← Previous Topic
           </button>
           </a>
-          <a href="/resources/Data_Analysis">
+          <a href="/resources/MachineLearning">
             <button className="px-6 py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">
               Next Topic →
             </button>
