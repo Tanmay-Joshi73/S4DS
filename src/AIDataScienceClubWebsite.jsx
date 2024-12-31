@@ -219,7 +219,7 @@ const Navigation = () => {
               Resources
             </a>
             <a
-              href="/"
+              href="/Playground"
               className="text-white text-2xl hover:text-blue-200 transition-colors duration-300"
             >
               Playground

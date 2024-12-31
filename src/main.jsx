@@ -11,6 +11,7 @@ const MachineLearning_Page=lazy(()=> import('./Basic/MachineLearning.jsx'))
 const ResourcesPage=lazy(()=>import('./ResourcesPage.jsx'))
 const Basic=lazy(()=>import('./Basic/Basic.jsx'))
 const Data_Analysis=lazy(()=>import('./Basic/Data_Analysis.jsx'))
+const Playground_Page=lazy(()=>import('./Playground/Playgroundd.jsx'))
 // import Data_Analysis from './Basic/Data_Analysis.jsx';
 import { LayoutTemplate } from 'lucide-react';
 // Get the root element from your HTML
@@ -27,6 +28,7 @@ createRoot(root).render(
         <Route path="/resources/basic" element={<Basic />} />
         <Route path="/resources/Data_Analysis" element={<Data_Analysis />} />
         <Route path='/resources/MachineLearning' element={<MachineLearning_Page/>}/>
+        <Route path='/Playground' element={<Playground_Page/>}/>
       </Routes>
     </Suspense>
     </BrowserRouter>
