@@ -424,6 +424,112 @@ const EventSection = () => {
   );
 };
 
+// Contact Section
+
+import { Send, User, MessageSquare } from 'lucide-react';
+
+const ModernContact = () => {
+  return (
+    <section className="py-20 px-4 bg-gradient-to-br from-slate-50 to-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="px-4 py-2 bg-indigo-50 rounded-full text-sm font-medium text-indigo-600 inline-block mb-4 shadow-sm">
+            Contact Us
+          </span>
+          <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+            Get in Touch
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-5 gap-8 items-start">
+          <div className="md:col-span-2 space-y-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-indigo-50">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="p-3 bg-indigo-100 rounded-xl">
+                  <Mail className="w-6 h-6 text-indigo-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-800">Email Us</h3>
+                  <p className="text-sm text-gray-600">We'll respond within 24h</p>
+                </div>
+              </div>
+              <button className="group w-full flex items-center justify-between p-4 bg-white rounded-xl hover:bg-indigo-50 transition-colors">
+                <span className="text-gray-600">contact@example.com</span>
+                <Mail className="w-5 h-5 text-gray-400 group-hover:text-indigo-600" />
+              </button>
+            </div>
+
+            <div className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="relative overflow-hidden rounded-xl bg-white/90 p-6">
+                <div className="relative z-10">
+                  <h3 className="font-semibold mb-2 text-gray-800">Quick Response</h3>
+                  <p className="text-sm text-gray-600">Available 24/7 for urgent inquiries</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="md:col-span-3">
+            <div className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 rounded-2xl p-8 shadow-lg">
+              <form className="space-y-6">
+                <div className="space-y-4">
+                  <div className="relative">
+                    <label className="block mb-2 text-sm font-medium text-white">Name</label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        className="w-full pl-12 pr-4 py-4 bg-white/90 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition-shadow"
+                        placeholder="Your name"
+                      />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <label className="block mb-2 text-sm font-medium text-white">Email</label>
+                    <div className="relative">
+                      <input
+                        type="email"
+                        className="w-full pl-12 pr-4 py-4 bg-white/90 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition-shadow"
+                        placeholder="your@email.com"
+                      />
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <label className="block mb-2 text-sm font-medium text-white">Message</label>
+                    <div className="relative">
+                      <textarea
+                        rows="6"
+                        className="w-full pl-12 pr-4 py-4 bg-white/90 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition-shadow resize-none"
+                        placeholder="Your message here..."
+                      ></textarea>
+                      <MessageSquare className="absolute left-4 top-6 w-5 h-5 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-4 px-6 bg-white text-indigo-600 rounded-xl transition-all duration-200 transform hover:scale-[1.02] hover:bg-indigo-50 focus:scale-[0.98] flex items-center justify-center space-x-2 font-medium"
+                >
+                  <span>Send Message</span>
+                  <Send className="w-5 h-5" />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+
+
+
 
 
 // Main App Component
@@ -463,6 +569,7 @@ const AIDataScienceClubWebsite = () => {
   </div>
 </header>
 
+    {/* Code for the contact section */}
 
         {/* About Yourself Component */}
         <AboutStanfordAIClub />
@@ -472,54 +579,9 @@ const AIDataScienceClubWebsite = () => {
 
     {/* Event Section */}
     <EventSection />
-
-      {/* Main Content */}
+  <ModernContact />
+      {/* Main Content
       <div className="container bg-white mx-auto px-4 py-16 relative z-10">
-        {/* Contact Section */}
-        <section className="mb-16">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-100 animate-fadeInUp">
-            Get In Touch
-          </h2>
-          <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block mb-2 text-gray-600 dark:text-gray-300">Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="Your Name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block mb-2 text-gray-600 dark:text-gray-300">Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="message" className="block mb-2 text-gray-600 dark:text-gray-300">Message</label>
-                <textarea 
-                  id="message" 
-                  rows="4" 
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
-                  placeholder="Your message here..."
-                ></textarea>
-              </div>
-              <button 
-                type="submit" 
-                className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors dark:bg-blue-500 dark:hover:bg-blue-600"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
-        </section>
 
         {/* Footer */}
         <footer className="text-center py-8 bg-gray-900 dark:bg-black text-white rounded-xl shadow-lg">
@@ -539,7 +601,6 @@ const AIDataScienceClubWebsite = () => {
           </p>
         </footer>
       </div>
-    </div>
   );
 };
 
