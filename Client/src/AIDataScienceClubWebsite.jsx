@@ -10,12 +10,13 @@ import Animation from "./assets/animation.mp4"
 import PowerBI from "./assets/PowerBI.webp"
 // import sample from "./assets/sample.mp4"
 import "./index.css"
-import { 
-  Code, Database, Brain, Cpu, 
-  TrendingUp, Users, Book, GitBranch, 
-  Award, Target, Zap, Server, 
-  Rocket, Terminal, Globe, Moon, Sun, Mail, Phone, MapPin ,Github,Eye,
- Trophy, Star, Crown ,Instagram} from 'lucide-react';
+import {
+  Code, Database, Brain, Cpu,
+  TrendingUp, Users, Book, GitBranch,
+  Award, Target, Zap, Server,
+  Rocket, Terminal, Globe, Moon, Sun, Mail, Phone, MapPin, Github, Eye,
+  Trophy, Star, Crown, Instagram
+} from 'lucide-react';
 
 // About the introduction
 const AboutStanfordAIClub = () => {
@@ -160,7 +161,7 @@ const Projects = () => {
                   Project Title
                 </h3>
                 <p className="text-gray-600">
-                A brief description of the chatbot project goes here. It showcases our team's work on natural language processing and conversational AI
+                  A brief description of the chatbot project goes here. It showcases our team's work on natural language processing and conversational AI
                 </p>
                 <div className="mt-4">
                   <a
@@ -260,7 +261,7 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Menu with improved styling */}
-        <div 
+        <div
           className={`
             fixed inset-0 bg-black bg-opacity-90 backdrop-blur-sm md:hidden
             transition-opacity duration-300 ease-in-out
@@ -335,8 +336,8 @@ const EventSection = () => {
       rewards: ["InAugration of AI Club",
         "Join us for the grand inauguration of our AI Club",
         " we unveil exciting plans and initiatives for the coming year",
-      "Launch of the AI Club website."]    
-        },
+        "Launch of the AI Club website."]
+    },
 
     {
       place: "AI Hackathon (Upcoming)",
@@ -370,7 +371,7 @@ const EventSection = () => {
                   <h2 className="text-4xl font-bold text-white">PowerBI</h2>
                 </div>
                 <ul className="text-gray-200 text-lg space-y-3 mb-8">
-                  {["Efficent Data Visualization", "Seemless Data Integretion", "Real Time Data Streaming","Scalable And Secure"].map((reward, idx) => (
+                  {["Efficent Data Visualization", "Seemless Data Integretion", "Real Time Data Streaming", "Scalable And Secure"].map((reward, idx) => (
                     <li key={idx} className="flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-blue-400"></span>
                       {reward}
@@ -424,7 +425,35 @@ const EventSection = () => {
   );
 };
 
-// Contact Section
+// Contact Section  // 
+
+const FormSubmit = async (e) => {
+  e.preventDefault()
+  const formData = {
+    Name: e.target.Name.value,
+    Email: e.target.Email.value,
+    Mes: e.target.Message.value
+  }
+  try {
+    alert("Hey just before the Form Submition")
+    const Responce = await fetch('http://localhost:8000/App/FormData', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    if (Responce.ok) {
+      // alert("Hey data is send Succsessfully")
+      e.target.reset()
+    }
+    else {
+      // alert("Hey Responce is not done perfectly")
+    }
+  }
+  catch (err) {
+    alert(err)
+  }
+}
+
 
 import { Send, User, MessageSquare } from 'lucide-react';
 
@@ -471,7 +500,7 @@ const ModernContact = () => {
 
           <div className="md:col-span-3">
             <div className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 rounded-2xl p-8 shadow-lg">
-              <form className="space-y-6">
+              <form onSubmit={FormSubmit} className="space-y-6">
                 <div className="space-y-4">
                   <div className="relative">
                     <label className="block mb-2 text-sm font-medium text-white">Name</label>
@@ -480,6 +509,9 @@ const ModernContact = () => {
                         type="text"
                         className="w-full pl-12 pr-4 py-4 bg-white/90 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition-shadow"
                         placeholder="Your name"
+                        name='Name'
+                        required
+                        minLength={10}
                       />
                       <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                     </div>
@@ -492,6 +524,9 @@ const ModernContact = () => {
                         type="email"
                         className="w-full pl-12 pr-4 py-4 bg-white/90 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition-shadow"
                         placeholder="your@email.com"
+                        name='Email'
+                        required
+                        minLength={8}
                       />
                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                     </div>
@@ -504,6 +539,10 @@ const ModernContact = () => {
                         rows="6"
                         className="w-full pl-12 pr-4 py-4 bg-white/90 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-transparent transition-shadow resize-none"
                         placeholder="Your message here..."
+                        name='Message'
+                        minLength={10}
+                        maxLength={50}
+                        required
                       ></textarea>
                       <MessageSquare className="absolute left-4 top-6 w-5 h-5 text-gray-400" />
                     </div>
@@ -531,7 +570,6 @@ const ModernContact = () => {
 
 
 
-
 // Main App Component
 const AIDataScienceClubWebsite = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -551,56 +589,56 @@ const AIDataScienceClubWebsite = () => {
     <div className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-gray-100' : 'bg-gradient-to-br from-gray-50 to-gray-100'} font-sans transition-colors duration-300`}>
       {/* Theme Toggle */}
       {/* <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} /> */}
-      
+
 
 
 
       {/* Header with Glowing Effect  Header section */}
       <header className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-700 text-white min-h-screen flex items-center justify-center text-center overflow-hidden w-full max-w-full px-8">
-  <Navigation />
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-70 blur-3xl animate-pulse"></div>
-  <div className="relative z-20 max-w-7xl mx-auto flex flex-col items-center justify-center">
-    <h1 className="text-6xl lg:text-7xl font-extrabold mb-6 animate-fadeInUp text-white drop-shadow-lg">
-      AI & Data Science Club
-    </h1>
-    <p className="text-2xl lg:text-3xl max-w-4xl mx-auto animate-fadeInUp delay-200 text-gray-100 leading-relaxed">
-      Pioneering the future of technology through innovative artificial intelligence and data-driven solutions
-    </p>
-  </div>
-</header>
+        <Navigation />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-70 blur-3xl animate-pulse"></div>
+        <div className="relative z-20 max-w-7xl mx-auto flex flex-col items-center justify-center">
+          <h1 className="text-6xl lg:text-7xl font-extrabold mb-6 animate-fadeInUp text-white drop-shadow-lg">
+            AI & Data Science Club
+          </h1>
+          <p className="text-2xl lg:text-3xl max-w-4xl mx-auto animate-fadeInUp delay-200 text-gray-100 leading-relaxed">
+            Pioneering the future of technology through innovative artificial intelligence and data-driven solutions
+          </p>
+        </div>
+      </header>
 
-    {/* Code for the contact section */}
+      {/* Code for the contact section */}
 
-        {/* About Yourself Component */}
-        <AboutStanfordAIClub />
+      {/* About Yourself Component */}
+      <AboutStanfordAIClub />
 
       {/* Featured Highlights */}
       <FeaturedHighlights />
 
-    {/* Event Section */}
-    <EventSection />
-  <ModernContact />
+      {/* Event Section */}
+      <EventSection />
+      <ModernContact />
       {/* Main Content
       <div className="container bg-white mx-auto px-4 py-16 relative z-10">
 
         {/* Footer */}
-        <footer className="text-center py-8 bg-gray-900 dark:bg-black text-white rounded-xl shadow-lg">
-          <div className="flex justify-center space-x-6 mb-4">
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              <Mail className="w-6 h-6" />
-            </a>
-            <a href="https://www.instagram.com/s4ds_dypcoe/" className="hover:text-blue-400 transition-colors">
-              <Instagram className="w-6 h-6" />
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              <MapPin className="w-6 h-6" />
-            </a>
-          </div>
-          <p className="text-gray-300 dark:text-gray-400">
-            © 2024 AI & Data Science Club | Empowering Future Innovators
-          </p>
-        </footer>
-      </div>
+      <footer className="text-center py-8 bg-gray-900 dark:bg-black text-white rounded-xl shadow-lg">
+        <div className="flex justify-center space-x-6 mb-4">
+          <a href="#" className="hover:text-blue-400 transition-colors">
+            <Mail className="w-6 h-6" />
+          </a>
+          <a href="https://www.instagram.com/s4ds_dypcoe/" className="hover:text-blue-400 transition-colors">
+            <Instagram className="w-6 h-6" />
+          </a>
+          <a href="#" className="hover:text-blue-400 transition-colors">
+            <MapPin className="w-6 h-6" />
+          </a>
+        </div>
+        <p className="text-gray-300 dark:text-gray-400">
+          © 2024 AI & Data Science Club | Empowering Future Innovators
+        </p>
+      </footer>
+    </div>
   );
 };
 
