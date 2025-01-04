@@ -2,6 +2,7 @@ import React from 'react';
 import { Suspense ,lazy} from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Use react-router-dom
+import Load from './LoadingSpinner.jsx'; // Loading Spinner 
 import './index.css';
 import App from './App.jsx';
 // import Basic from './Basic/Basic.jsx';
@@ -21,7 +22,7 @@ const root = document.getElementById('root');
 createRoot(root).render(
   <React.StrictMode>
     <BrowserRouter>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Load />}>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/resources" element={<ResourcesPage />} />
