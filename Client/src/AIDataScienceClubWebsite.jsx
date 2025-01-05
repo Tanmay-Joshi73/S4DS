@@ -8,6 +8,7 @@ import eating from "./assets/eating.mp4"
 import skeleton from "./assets/skeleton.mp4"
 import Animation from "./assets/animation.mp4"
 import PowerBI from "./assets/PowerBI.webp"
+import AI_Theme_Animation from "./AI-Theme_Animation.jsx"
 // import sample from "./assets/sample.mp4"
 import "./index.css"
 import {
@@ -436,17 +437,14 @@ const FormSubmit = async (e) => {
   }
   try {
     alert("Hey just before the Form Submition")
-    const Responce = await fetch('http://localhost:8000/App/FormData', {
+    const Responce = await fetch('https://s4ds-backend.onrender.com/App/FormData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     })
     if (Responce.ok) {
-      // alert("Hey data is send Succsessfully")
+     
       e.target.reset()
-    }
-    else {
-      // alert("Hey Responce is not done perfectly")
     }
   }
   catch (err) {
@@ -483,7 +481,7 @@ const ModernContact = () => {
                 </div>
               </div>
               <button className="group w-full flex items-center justify-between p-4 bg-white rounded-xl hover:bg-indigo-50 transition-colors">
-                <span className="text-gray-600">contact@example.com</span>
+                <span className="text-gray-600">s4dsdypcoe02@gmail.com</span>
                 <Mail className="w-5 h-5 text-gray-400 group-hover:text-indigo-600" />
               </button>
             </div>
@@ -574,23 +572,47 @@ const ModernContact = () => {
 const AIDataScienceClubWebsite = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // State to manage loading
+  const [headerVisible, setHeaderVisible] = useState(false); // State to control header visibility
 
-  // Toggle theme
-  const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode);
+  // Use useEffect to handle the loading animation duration
+  useEffect(() => {
+    // Set a timer to simulate the loading animation duration (e.g., 3 seconds)
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Set loading to false once animation is done
+    }, 3000); // Change the time based on how long you want the animation to run
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
+
+  // Scroll event to check if the user has scrolled down to reveal the header
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setHeaderVisible(true); // Show the header when user scrolls down
+    } else {
+      setHeaderVisible(false); // Hide the header when at the top
+    }
   };
 
-  // Apply dark mode class to body
+  // Add scroll event listener
   useEffect(() => {
-    document.body.classList.toggle('dark', isDarkMode);
-  }, [isDarkMode]);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // Cleanup on unmount
+    };
+  }, []);
+
+  if (isLoading) {
+    return <AI_Theme_Animation />; // Show the animation while loading
+  }
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900 text-gray-100' : 'bg-gradient-to-br from-gray-50 to-gray-100'} font-sans transition-colors duration-300`}>
+
+     
       {/* Theme Toggle */}
       {/* <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} /> */}
-
-
 
 
       {/* Header with Glowing Effect  Header section */}
@@ -607,8 +629,7 @@ const AIDataScienceClubWebsite = () => {
         </div>
       </header>
 
-      {/* Code for the contact section */}
-
+     
       {/* About Yourself Component */}
       <AboutStanfordAIClub />
 
