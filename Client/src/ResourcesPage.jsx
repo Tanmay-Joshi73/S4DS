@@ -164,8 +164,12 @@ const NewsSection = () => {
       const apiURL = `https://newsapi.org/v2/everything?q=aiml OR "artificial intelligence" OR "machine learning"&from=2024-12-07&sortBy=publishedAt&language=en&apiKey=89dcb92f373941e88ee6994260804b8a`;
       const response = await fetch(apiURL);
       const data = await response.json();
-      const filteredArticles = data.articles.filter(article => article.urlToImage); // Filter articles with images
-      setNews(filteredArticles.slice(0, 4)); // Get first 4 articles with images
+  
+      console.log(data); // Inspect the response for debugging
+  
+      // Check if data.articles is present and then filter
+      const filteredArticles = data.articles ? data.articles.filter(article => article.urlToImage) : [];
+      setNews(filteredArticles.slice(0, 4));
       setLoading(false);
     } catch (error) {
       console.error('Error fetching news:', error);
