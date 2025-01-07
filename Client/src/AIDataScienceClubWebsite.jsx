@@ -10,6 +10,8 @@ import Animation from "./assets/animation.mp4"
 import PowerBI from "./assets/PowerBI.webp"
 import AI_Theme_Animation from "./AI-Theme_Animation.jsx"
 // import sample from "./assets/sample.mp4"
+import { Network, Lightbulb } from 'lucide-react';
+import { motion } from 'framer-motion';
 import "./index.css"
 import {
   Code, Database, Brain, Cpu,
@@ -21,38 +23,132 @@ import {
 
 // About the introduction
 const AboutStanfordAIClub = () => {
+  const springTransition = {
+    type: "spring",
+    stiffness: 70,  // Reduced for smoother animation
+    damping: 17     // Adjusted for cleaner movement
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15  // Slightly faster stagger
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: springTransition
+    }
+  };
+
   return (
-    <section className="bg-white py-16 px-8 md:px-16">
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
-        <div>
-          <h2 className="text-5xl font-bold text-black dark:text-gray-800 mb-6">About S4DS AI Club</h2>
-          <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            The S4DS Club (S4DS) is the premier AI club at Dy Patil Akurdi. We are dedicated to fostering an inclusive and vibrant community for students interested in artificial intelligence. We aim to provide all students from established AI researchers to folks wanting to get into the field with the knowledge and opportunity to engage with AI research & development. Our vision is to serve as a centralized hub for the AI community on campus, connecting everyone from domain experts and practitioners to theorists.
-          </p>
-          <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            We offer a wide range of activities such as student-led research projects, reading groups, workshops, and classes designed to equip members with essential AI skills.
-          </p>
-          <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            We also engage with non-profit organizations with the shared vision of democratizing AI and reducing global inequalities. By hosting small-group discussions and lectures with leading experts , the club provides invaluable networking and learning opportunities for students passionate about AI.
-          </p>
-        </div>
-        <div className="flex items-center justify-center">
-          <video
-            className="w-full rounded-lg shadow-lg"
-            muted
-            loop
-            autoPlay
-            poster="https://via.placeholder.com/400x300"
+    <section className="bg-white py-20 px-8 md:px-16 overflow-hidden">
+      <div className="max-w-screen-xl mx-auto">
+        <motion.div 
+          initial={{ y: 0, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={springTransition}
+          className="text-center mb-16"
+        >
+          <h2 className="text-6xl font-bold mb-6">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+              Welcome to S4DS AI Club
+            </span>
+          </h2>
+          <motion.div 
+            className="flex items-center justify-center gap-4 mb-8"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={springTransition}
           >
-            <source src={Animation} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            <div className="h-[2px] w-16 bg-gradient-to-r from-blue-600 to-transparent"></div>
+            <Cpu className="w-6 h-6 text-blue-600" />
+            <div className="h-[2px] w-16 bg-gradient-to-l from-purple-600 to-transparent"></div>
+          </motion.div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div className="space-y-6">
+              <motion.div
+                variants={itemVariants}
+                className="flex items-start gap-4 hover:translate-x-2 transition-transform duration-300"
+              >
+                <Brain className="w-8 h-8 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Premier AI Community</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    The S4DS Club is the premier AI club at Dy Patil Akurdi, fostering an inclusive and vibrant community for students passionate about artificial intelligence.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex items-start gap-4 hover:translate-x-2 transition-transform duration-300"
+              >
+                <Network className="w-8 h-8 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Research & Development</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    We provide opportunities for all students - from established researchers to newcomers - to engage with cutting-edge AI research and development projects.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex items-start gap-4 hover:translate-x-2 transition-transform duration-300"
+              >
+                <Lightbulb className="w-8 h-8 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Impact & Innovation</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Through partnerships with non-profit organizations, workshops, and expert-led sessions, we're working to democratize AI and reduce global inequalities.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={springTransition}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
+              <video
+                className="w-full rounded-2xl transition-transform duration-500 hover:scale-105"
+                muted
+                loop
+                autoPlay
+                poster="/api/placeholder/600/400"
+              >
+                <source src={Animation} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
-
 
 
 
@@ -437,7 +533,7 @@ const FormSubmit = async (e) => {
   }
   try {
     alert("Hey just before the Form Submition")
-    const Responce = await fetch('https://s4ds-backend.onrender.com/App/FormData', {
+    const Responce = await fetch('http://localhost:8000/App/FormData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)

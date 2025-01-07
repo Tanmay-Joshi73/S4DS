@@ -1,6 +1,8 @@
 import React from 'react';
 import { Book, Video, Code, Download, ExternalLink, BookOpen, FileText, Github, Youtube, Database } from 'lucide-react';
-
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+// import { Skeleton } from '@/components/ui/skeleton';
+import{ useState, useEffect } from 'react';
 const ResourcesPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -146,75 +148,100 @@ const ResourcesPage = () => {
 
 
         {/* Latest Resources */}
-        {/* <NewsSection /> */}
+        <NewsSection />
       </div>
     </div>
   );
 };
 
 
-const NewsSection=()=>{
+const NewsSection = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch News Data
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await fetch(
-          `https://newsapi.org/v2/everything?q=AI OR Machine Learning&sortBy=publishedAt&apiKey=YOUR_API_KEY`
-        );
-        const data = await response.json();
-        setNews(data.articles);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching news:', error);
-        setLoading(false);
-      }
-    };
+  const getNews = async () => {
+    try {
+      const apiURL = `https://newsapi.org/v2/everything?q=aiml OR "artificial intelligence" OR "machine learning"&from=2024-12-07&sortBy=publishedAt&language=en&apiKey=89dcb92f373941e88ee6994260804b8a`;
+      const response = await fetch(apiURL);
+      const data = await response.json();
+      const filteredArticles = data.articles.filter(article => article.urlToImage); // Filter articles with images
+      setNews(filteredArticles.slice(0, 4)); // Get first 4 articles with images
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+      setLoading(false);
+    }
+  };
 
-    fetchNews();
+  useEffect(() => {
+    getNews();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <div className="text-xl">Loading news...</div>
+      </div>
+    );
+  }
+
   return (
-    <section>
-      <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Latest Resources</h2>
-      {loading ? (
-        <p className="text-center text-gray-500">Loading...</p>
-      ) : (
-        <div className="grid md:grid-cols-2 gap-8">
-          {news.slice(0, 4).map((article, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <span className="bg-emerald-100 text-emerald-800 text-xs font-medium px-2.5 py-0.5 rounded">New</span>
-                  <span className="ml-2 text-gray-500 text-sm">
-                    {new Date(article.publishedAt).toLocaleDateString()}
-                  </span>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
-                <p className="text-gray-600 mb-4">{article.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">{article.source.name}</span>
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-emerald-500 hover:text-emerald-600"
-                  >
-                    Access Resource
-                    <ExternalLink className="w-4 h-4 ml-1" />
-                  </a>
-                </div>
+    <div className="max-w-7xl mx-auto p-6">
+      <h2 className="text-3xl font-bold mb-8">Latest News</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {news.map((article, index) => (
+          <div 
+            key={index} 
+            className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
+          >
+            <div className="relative">
+              <img
+                src={article.urlToImage || '/api/placeholder/400/225'} // Default placeholder if no image
+                alt={article.title || 'No image available'}
+                className="w-full h-56 object-cover"
+              />
+              <span className="absolute top-4 left-4 bg-black/75 text-white px-3 py-1 rounded text-sm">
+                {article.source.name}
+              </span>
+            </div>
+            <div className="p-6 flex-grow flex flex-col">
+              <h3 className="text-xl font-semibold mb-2">
+                <a 
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-600 transition-colors duration-200"
+                >
+                  {article.title}
+                </a>
+              </h3>
+              <p className="text-gray-600 mb-4 line-clamp-2">
+                {article.description || 'No description available'}
+              </p>
+              <div className="mt-auto flex items-center justify-between">
+                <span className="text-sm text-gray-500">
+                  {new Date(article.publishedAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </span>
+                <a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Read Full Article
+                </a>
               </div>
             </div>
-          ))}
-        </div>
-      )}
-    </section>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
+
 
 export default ResourcesPage;
