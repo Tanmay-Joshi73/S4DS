@@ -146,13 +146,13 @@ const ResourcesPage = () => {
 
 
         {/* Latest Resources */}
-        <NewsSection />
+        {/* <NewsSection /> */}
       </div>
     </div>
   );
 };
 
-export default ResourcesPage;
+
 const NewsSection=()=>{
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -217,3 +217,4 @@ const NewsSection=()=>{
   );
 };
 
+export default ResourcesPage;
