@@ -20,6 +20,13 @@ import {
   X
 } from 'lucide-react';
 
+//Importing all the necessary files for the Unsupervised Learning Seaction
+import {DBSCAN, Intro,KClustering,DimensionalityReduction,PCA, TSNE, Autoencoder ,AnomalyDetection} from "./UnsupervisedLearning/Unsupervisedlearning";
+
+
+
+
+
 //Data for the labels
 import { ScatterChart, Scatter } from 'recharts';
 
@@ -114,16 +121,16 @@ predictions = model.predict(X_test)`
     content: {
       description: 'Unsupervised learning deals with data that has no labels. The model learns patterns and structures from the input data on its own.',
       algorithms: [
-        'K-Means Clustering',
-        'Hierarchical Clustering',
-        'Principal Component Analysis (PCA)',
-        'Autoencoders'
+        // 'K-Means Clustering',
+        // 'Hierarchical Clustering',
+        // 'Principal Component Analysis (PCA)',
+        // 'Autoencoders'
       ],
-      code: `# Example: K-Means Clustering in Python
-from sklearn.cluster import KMeans
-kmeans = KMeans(n_clusters=3)
-kmeans.fit(data)
-labels = kmeans.labels_`
+      // code: `# Example: K-Means Clustering in Python
+// from sklearn.cluster import KMeans
+// kmeans = KMeans(n_clusters=3)
+// kmeans.fit(data)
+// labels = kmeans.labels_`
     }
   },
   {
@@ -303,7 +310,24 @@ const MachineLearning = () => {
     </div>
   </div>
 )}   
+
+
+        {/* Unsupervised Learning */}
     
+        {topic.id === 'unsupervised' && (
+          <div>
+          <Intro />
+          <KClustering />
+          <DBSCAN />
+          <DimensionalityReduction />
+          <PCA />
+          <TSNE />
+          <Autoencoder />
+          <AnomalyDetection />
+         </div>
+)}
+
+
             {/* Existing Content */}
             {topic.content.features && (
               <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
@@ -440,5 +464,6 @@ const MachineLearning = () => {
     </div>
   );
 };
+
 
 export default MachineLearning;

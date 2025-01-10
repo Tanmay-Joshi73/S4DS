@@ -160,16 +160,28 @@ const NewsSection = () => {
   const [loading, setLoading] = useState(true);
 
   const getNews = async () => {
+    const apiKey = '5cYD0e694vpuVwDziK6RQHciPau1gbD2lTA2tqzzRNU6B7Fk';
+    const url = `https://api.currentsapi.services/v1/latest-news?language=en&apiKey=${apiKey}`;
+
     try {
-      const apiURL = `https://newsapi.org/v2/everything?q=aiml OR "artificial intelligence" OR "machine learning"&from=2024-12-07&sortBy=publishedAt&language=en&apiKey=89dcb92f373941e88ee6994260804b8a`;
-      const response = await fetch(apiURL);
+      const response = await fetch(url);
       const data = await response.json();
-  
-      console.log(data); // Inspect the response for debugging
-  
-      // Check if data.articles is present and then filter
-      const filteredArticles = data.articles ? data.articles.filter(article => article.urlToImage) : [];
-      setNews(filteredArticles.slice(0, 4));
+
+      // Log the entire response to check what we're receiving
+      console.log(data);
+
+      // Define AI-related keywords
+      const aiKeywords = ['AI'];
+
+      // Filter news based on AI-related terms
+      const filteredNews = data.news.filter(article => {
+        return aiKeywords.some(keyword =>
+          article.title.toLowerCase().includes(keyword) ||
+          article.description.toLowerCase().includes(keyword)
+        );
+      });
+
+      setNews(filteredNews);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching news:', error);
@@ -191,57 +203,61 @@ const NewsSection = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-8">Latest News</h2>
+      <h2 className="text-3xl font-bold mb-8">AI & Data Science News</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {news.map((article, index) => (
-          <div 
-            key={index} 
-            className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
-          >
-            <div className="relative">
-              <img
-                src={article.urlToImage || '/api/placeholder/400/225'} // Default placeholder if no image
-                alt={article.title || 'No image available'}
-                className="w-full h-56 object-cover"
-              />
-              <span className="absolute top-4 left-4 bg-black/75 text-white px-3 py-1 rounded text-sm">
-                {article.source.name}
-              </span>
-            </div>
-            <div className="p-6 flex-grow flex flex-col">
-              <h3 className="text-xl font-semibold mb-2">
-                <a 
-                  href={article.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-600 transition-colors duration-200"
-                >
-                  {article.title}
-                </a>
-              </h3>
-              <p className="text-gray-600 mb-4 line-clamp-2">
-                {article.description || 'No description available'}
-              </p>
-              <div className="mt-auto flex items-center justify-between">
-                <span className="text-sm text-gray-500">
-                  {new Date(article.publishedAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+        {news.length === 0 ? (
+          <p>No AI-related news found.</p>
+        ) : (
+          news.map((article, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
+            >
+              <div className="relative">
+                <img
+                  src={article.image || '/api/placeholder/400/225'}
+                  alt={article.title || 'No image available'}
+                  className="w-full h-56 object-cover"
+                />
+                <span className="absolute top-4 left-4 bg-black/75 text-white px-3 py-1 rounded text-sm">
+                  {article.author || 'Unknown Author'}
                 </span>
-                <a
-                  href={article.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-200"
-                >
-                  Read Full Article
-                </a>
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
+                <h3 className="text-xl font-semibold mb-2">
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 transition-colors duration-200"
+                  >
+                    {article.title}
+                  </a>
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-2">
+                  {article.description || 'No description available'}
+                </p>
+                <div className="mt-auto flex items-center justify-between">
+                  <span className="text-sm text-gray-500">
+                    {new Date(article.published).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-200"
+                  >
+                    Read Full Article
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
