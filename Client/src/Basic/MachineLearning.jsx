@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 
 //Importing all the necessary files for the Unsupervised Learning Seaction
-import {DBSCAN, Intro,KClustering,DimensionalityReduction,PCA, TSNE, Autoencoder ,AnomalyDetection} from "./UnsupervisedLearning/Unsupervisedlearning";
+import {DBSCAN, Intro,KClustering,DimensionalityReduction,PCA, TSNE ,AnomalyDetection} from "./UnsupervisedLearning/Unsupervisedlearning";
 
 
 
@@ -322,7 +322,7 @@ const MachineLearning = () => {
           <DimensionalityReduction />
           <PCA />
           <TSNE />
-          <Autoencoder />
+         
           <AnomalyDetection />
          </div>
 )}

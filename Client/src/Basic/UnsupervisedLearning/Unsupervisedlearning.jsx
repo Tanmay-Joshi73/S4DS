@@ -3,7 +3,7 @@ import Kclustering_Image from '../../assets/KClustering.png'
 import DBSCAN_Image from "../../assets/DBSCAN.png"
 import PCA_Image from "../../assets/PCA.png"
 import TSNE_Image from "../../assets/TSNE.png"
-import AutoEncoder_Image from "../../assets/Autoencoder.png"
+// import AutoEncoder_Image from "../../assets/Autoencoder.png"
 import Anamoly_Image from "../../assets/Anamoly.png"
 const Intro = () => {
     return (
@@ -374,98 +374,97 @@ const PCA = () => {
   };
 
 
-  const Autoencoder = () => {
-    return (
-      <section className="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className="border-l-4 border-blue-500 p-8">
-          <div className="flex items-center mb-4">
-            <BookOpen className="w-6 h-6 text-emerald-500 mr-2" />
-            <h2 className="text-2xl font-bold">Autoencoders</h2>
-          </div>
+  // const Autoencoder = () => {
+  //   return (
+  //     <section className="bg-white rounded-xl shadow-lg overflow-hidden">
+  //       <div className="border-l-4 border-blue-500 p-8">
+  //         <div className="flex items-center mb-4">
+  //           <BookOpen className="w-6 h-6 text-emerald-500 mr-2" />
+  //           <h2 className="text-2xl font-bold">Autoencoders</h2>
+  //         </div>
   
-          <div className="text-gray-600 mb-6">
-            <h3 className="text-lg font-semibold mb-3">Concept:</h3>
-            <p className="mb-4">
-              An Autoencoder is a type of artificial neural network used for unsupervised learning. It aims to learn a compressed representation of input data. The encoder compresses the data, and the decoder reconstructs it, ideally reproducing the original data.
-            </p>
+  //         <div className="text-gray-600 mb-6">
+  //           <h3 className="text-lg font-semibold mb-3">Concept:</h3>
+  //           <p className="mb-4">
+  //             An Autoencoder is a type of artificial neural network used for unsupervised learning. It aims to learn a compressed representation of input data. The encoder compresses the data, and the decoder reconstructs it, ideally reproducing the original data.
+  //           </p>
   
-            <h3 className="text-lg font-semibold mt-6 mb-3">Steps in Autoencoders:</h3>
-            <ol className="list-decimal pl-6 space-y-2">
-              <li><strong>Encoder:</strong> Maps the input to a lower-dimensional latent space.</li>
-              <li><strong>Decoder:</strong> Reconstructs the input data from the compressed representation.</li>
-              <li><strong>Loss Function:</strong> Minimizes the reconstruction error, often using mean squared error.</li>
-            </ol>
+  //           <h3 className="text-lg font-semibold mt-6 mb-3">Steps in Autoencoders:</h3>
+  //           <ol className="list-decimal pl-6 space-y-2">
+  //             <li><strong>Encoder:</strong> Maps the input to a lower-dimensional latent space.</li>
+  //             <li><strong>Decoder:</strong> Reconstructs the input data from the compressed representation.</li>
+  //             <li><strong>Loss Function:</strong> Minimizes the reconstruction error, often using mean squared error.</li>
+  //           </ol>
   
-            <h3 className="text-lg font-semibold mt-6 mb-3">Implementation Code:</h3>
-            <div className="bg-gray-900 rounded-lg p-4 mb-4 overflow-x-auto">
-              <pre className="text-green-400 font-mono whitespace-pre">
-  {`import numpy as np
-  import matplotlib.pyplot as plt
-  from sklearn.datasets import load_digits
-  from sklearn.model_selection import train_test_split
-  from sklearn.preprocessing import MinMaxScaler
-  from keras.models import Model
-  from keras.layers import Input, Dense
+  //           <h3 className="text-lg font-semibold mt-6 mb-3">Implementation Code:</h3>
+  //           <div className="bg-gray-900 rounded-lg p-4 mb-4 overflow-x-auto">
+  //             <pre className="text-green-400 font-mono whitespace-pre">
+  // {`import numpy as np
+  // import matplotlib.pyplot as plt
+  // from sklearn.datasets import load_digits
+  // from sklearn.model_selection import train_test_split
+  // from sklearn.preprocessing import MinMaxScaler
+  // from keras.models import Model
+  // from keras.layers import Input, Dense
   
-  # Load data
-  digits = load_digits()
-  X = digits.data
+  // # Load data
+  // digits = load_digits()
+  // X = digits.data
   
-  # Normalize data
-  scaler = MinMaxScaler()
-  X_scaled = scaler.fit_transform(X)
+  // # Normalize data
+  // scaler = MinMaxScaler()
+  // X_scaled = scaler.fit_transform(X)
   
-  # Train-test split
-  X_train, X_test = train_test_split(X_scaled, test_size=0.2, random_state=42)
+  // # Train-test split
+  // X_train, X_test = train_test_split(X_scaled, test_size=0.2, random_state=42)
   
-  # Build autoencoder model
-  input_layer = Input(shape=(X_train.shape[1],))
-  encoded = Dense(32, activation='relu')(input_layer)
-  decoded = Dense(X_train.shape[1], activation='sigmoid')(encoded)
-  autoencoder = Model(input_layer, decoded)
+  // # Build autoencoder model
+  // input_layer = Input(shape=(X_train.shape[1],))
+  // encoded = Dense(32, activation='relu')(input_layer)
+  // decoded = Dense(X_train.shape[1], activation='sigmoid')(encoded)
+  // autoencoder = Model(input_layer, decoded)
   
-  autoencoder.compile(optimizer='adam', loss='mean_squared_error')
+  // autoencoder.compile(optimizer='adam', loss='mean_squared_error')
   
-  # Train the model
-  autoencoder.fit(X_train, X_train, epochs=50, batch_size=256, validation_data=(X_test, X_test))
+  // # Train the model
+  // autoencoder.fit(X_train, X_train, epochs=50, batch_size=256, validation_data=(X_test, X_test))
   
-  # Predict and plot results
-  X_pred = autoencoder.predict(X_test)
-  plt.figure(figsize=(8, 4))
-  plt.subplot(1, 2, 1)
-  plt.imshow(X_test[0].reshape(8, 8), cmap='gray')
-  plt.title("Original Image")
-  plt.subplot(1, 2, 2)
-  plt.imshow(X_pred[0].reshape(8, 8), cmap='gray')
-  plt.title("Reconstructed Image")
-  plt.show()`}</pre>
-            </div>
+  // # Predict and plot results
+  // X_pred = autoencoder.predict(X_test)
+  // plt.figure(figsize=(8, 4))
+  // plt.subplot(1, 2, 1)
+  // plt.imshow(X_test[0].reshape(8, 8), cmap='gray')
+  // plt.title("Original Image")
+  // plt.subplot(1, 2, 2)
+  // plt.imshow(X_pred[0].reshape(8, 8), cmap='gray')
+  // plt.title("Reconstructed Image")
+  // plt.show()`}</pre>
+  //           </div>
   
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
-              <h4 className="font-semibold text-blue-800 mb-2">Code Explanation:</h4>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
-                <li><code className="bg-blue-100 px-1 rounded">MinMaxScaler</code>: Scales the input data to the range [0, 1].</li>
-                <li><code className="bg-blue-100 px-1 rounded">autoencoder.fit</code>: Trains the autoencoder model.</li>
-                <li>The plot shows an original digit image and its reconstructed version after training the autoencoder.</li>
-              </ul>
-            </div>
+  //           <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
+  //             <h4 className="font-semibold text-blue-800 mb-2">Code Explanation:</h4>
+  //             <ul className="list-disc list-inside text-gray-700 space-y-2">
+  //               <li><code className="bg-blue-100 px-1 rounded">MinMaxScaler</code>: Scales the input data to the range [0, 1].</li>
+  //               <li><code className="bg-blue-100 px-1 rounded">autoencoder.fit</code>: Trains the autoencoder model.</li>
+  //               <li>The plot shows an original digit image and its reconstructed version after training the autoencoder.</li>
+  //             </ul>
+  //           </div>
   
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold mb-3">Output Visualization:</h3>
-              <div className="bg-white border border-gray-200 rounded-lg p-4">
-                {/* Replace the src below with your Autoencoder output image */}
-                <img 
-                  src={AutoEncoder_Image}
-                  alt="Autoencoder Reconstruction Output" 
-                  className="max-w-full h-auto"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  };
+  //           <div className="mt-6">
+  //             <h3 className="text-lg font-semibold mb-3">Output Visualization:</h3>
+  //             <div className="bg-white border border-gray-200 rounded-lg p-4">
+  //               <img 
+  //                 src={AutoEncoder_Image}
+  //                 alt="Autoencoder Reconstruction Output" 
+  //                 className="max-w-full h-auto"
+  //               />
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </section>
+  //   );
+  // };
 
 //   const FPGrowth = () => {
 //     return (
@@ -608,5 +607,5 @@ const AnomalyDetection = () => {
     );
   };
   
-export { Intro, KClustering, DBSCAN, DimensionalityReduction,PCA,TSNE ,Autoencoder,AnomalyDetection}
+export { Intro, KClustering, DBSCAN, DimensionalityReduction,PCA,TSNE,AnomalyDetection}
 
