@@ -3,6 +3,8 @@ import Kclustering_Image from '../../assets/KClustering.png'
 import DBSCAN_Image from "../../assets/DBSCAN.png"
 import PCA_Image from "../../assets/PCA.png"
 import TSNE_Image from "../../assets/TSNE.png"
+import SOM_Image from "../../assets/SOM.png"
+import Unsupervised_Img from "../../assets/UnsupervisedLearning-Image.webp"
 // import AutoEncoder_Image from "../../assets/Autoencoder.png"
 import Anamoly_Image from "../../assets/Anamoly.png"
 const Intro = () => {
@@ -14,7 +16,7 @@ const Intro = () => {
             </p>
             <div className="relative rounded-xl overflow-hidden shadow-lg">
                 <img
-
+                    src={Unsupervised_Img}
                     alt="Unsupervised Learning"
                     className="w-full object-cover object-center rounded-xl"
                     style={{ height: '400px' }}
@@ -607,5 +609,97 @@ const AnomalyDetection = () => {
     );
   };
   
-export { Intro, KClustering, DBSCAN, DimensionalityReduction,PCA,TSNE,AnomalyDetection}
+
+  const SelfOrganizingMaps = () => {
+    return (
+      <section className="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="border-l-4 border-blue-500 p-8">
+          <div className="flex items-center mb-4">
+            <BookOpen className="w-6 h-6 text-emerald-500 mr-2" />
+            <h2 className="text-2xl font-bold">Self-Organizing Maps (SOMs)</h2>
+          </div>
+  
+          <div className="text-gray-600 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Concept:</h3>
+            <p className="mb-4">
+              A Self-Organizing Map (SOM) is an unsupervised learning algorithm used for clustering and visualizing high-dimensional data. It reduces data dimensions while preserving the topological structure. SOMs are useful for exploratory data analysis and pattern recognition.
+            </p>
+  
+            <ol className="list-decimal pl-6 space-y-2">
+              <li><strong>Step 1:</strong> Initialize the SOM grid with random weights.</li>
+              <li><strong>Step 2:</strong> For each input, find the Best Matching Unit (BMU).</li>
+              <li><strong>Step 3:</strong> Update the BMU and its neighbors’ weights.</li>
+              <li><strong>Step 4:</strong> Repeat the process over multiple iterations to refine clusters.</li>
+            </ol>
+          </div>
+  
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold mb-3">Implementation Code:</h3>
+            <div className="bg-gray-900 rounded-lg p-4 mb-4 overflow-x-auto">
+              <pre className="text-green-400 font-mono whitespace-pre">
+  {`
+  # Install MiniSom in Google Colab
+!pip install minisom
+
+from minisom import MiniSom
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate synthetic data (2D)
+np.random.seed(42)
+data = np.random.rand(100, 2)
+
+# Initialize and train SOM
+som = MiniSom(x=7, y=7, input_len=2, sigma=1.0, learning_rate=0.5)
+som.random_weights_init(data)
+som.train_random(data, num_iteration=100)
+
+# Plot SOM grid
+plt.figure(figsize=(7, 7))
+for i, x in enumerate(data):
+    w = som.winner(x)  # Get winning node
+    plt.text(w[0] + 0.5, w[1] + 0.5, str(i),
+             color=plt.cm.rainbow(i / 100), fontdict={'weight': 'bold', 'size': 9})
+
+plt.xlim([0, som._weights.shape[0] + 1])  # Fixed line
+plt.ylim([0, som._weights.shape[1] + 1])  # Fixed line
+plt.title("Self-Organizing Map (SOM)")
+plt.grid()
+plt.show()
+
+              `}
+              </pre>
+            </div>
+  
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
+              <h4 className="font-semibold text-blue-800 mb-2">Code Explanation:</h4>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <li><code className="bg-blue-100 px-1 rounded">MiniSom()</code>: Initializes the SOM with a 10x10 grid and input data of length 2.</li>
+                <li><code className="bg-blue-100 px-1 rounded">train_random()</code>: Randomly trains the SOM over 100 iterations.</li>
+                <li><code className="bg-blue-100 px-1 rounded">winner()</code>: Finds the Best Matching Unit (BMU) for each data point.</li>
+              </ul>
+            </div>
+  
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold mb-3">Output Visualization:</h3>
+              <div className="bg-white border border-gray-200 rounded-lg p-4">
+                <img 
+                  src={SOM_Image} 
+                  alt="SOM Clustering Output" 
+                  className="max-w-full h-auto"
+                />
+                <p className="text-gray-600 mt-2 text-sm">
+                  The red dots represent data points clustered on the SOM grid.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  };
+  
+
+
+export { Intro, KClustering, DBSCAN, DimensionalityReduction,PCA,TSNE,AnomalyDetection,SelfOrganizingMaps}
 
