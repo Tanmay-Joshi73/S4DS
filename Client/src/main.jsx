@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Use react-ro
 import Load from './LoadingSpinner.jsx'; // Loading Spinner 
 import './index.css';
 import App from './App.jsx';
+import RSVPForm from './RSVP/RSVP.jsx';
 // import Basic from './Basic/Basic.jsx';
  // Ensure this is the correct import path
 // import ResourcesPage from './ResourcesPage.jsx'; // Ensure this path is correct
@@ -30,6 +31,7 @@ createRoot(root).render(
         <Route path="/resources/Data_Analysis" element={<Data_Analysis />} />
         <Route path='/resources/MachineLearning' element={<MachineLearning_Page/>}/>
         <Route path='/Playground' element={<Playground_Page/>}/>
+        <Route path='/RSVP' element={<RSVPForm/>}/>
       </Routes>
     </Suspense>
     </BrowserRouter>
