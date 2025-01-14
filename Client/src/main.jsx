@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Use react-ro
 import Load from './LoadingSpinner.jsx'; // Loading Spinner 
 import './index.css';
 import App from './App.jsx';
-import RSVPForm from './RSVP/RSVP.jsx';
+// import RSVPForm from './RSVP/RSVP.jsx';
 // import Basic from './Basic/Basic.jsx';
  // Ensure this is the correct import path
 // import ResourcesPage from './ResourcesPage.jsx'; // Ensure this path is correct
@@ -14,6 +14,7 @@ const ResourcesPage=lazy(()=>import('./ResourcesPage.jsx'))
 const Basic=lazy(()=>import('./Basic/Basic.jsx'))
 const Data_Analysis=lazy(()=>import('./Basic/Data_Analysis.jsx'))
 const Playground_Page=lazy(()=>import('./Playground/Playgroundd.jsx'))
+const RsvpForm=lazy(()=>import('./RSVP/RSVP.jsx'))
 // import Data_Analysis from './Basic/Data_Analysis.jsx';
 import { LayoutTemplate } from 'lucide-react';
 // Get the root element from your HTML
@@ -31,7 +32,7 @@ createRoot(root).render(
         <Route path="/resources/Data_Analysis" element={<Data_Analysis />} />
         <Route path='/resources/MachineLearning' element={<MachineLearning_Page/>}/>
         <Route path='/Playground' element={<Playground_Page/>}/>
-        <Route path='/RSVP' element={<RSVPForm/>}/>
+        <Route path='/RSVP' element={<RsvpForm/>}/>
       </Routes>
     </Suspense>
     </BrowserRouter>

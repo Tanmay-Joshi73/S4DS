@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Check, X, Users, Utensils, Calendar, Heart } from 'lucide-react';
 
-
 const RSVPForm = () => {
     const [formData, setFormData] = useState({
       name: '',
@@ -11,11 +10,20 @@ const RSVPForm = () => {
   
     const [isPopupVisible, setIsPopupVisible] = useState(false);
   
+    // Function to reset the form
+    const resetForm = () => {
+      setFormData({
+        name: '',
+        email: '',
+        attending: null,
+      });
+    };
+  
     const handleSubmit = async (e) => {
       e.preventDefault();
       
       // Display the popup
-      setIsPopupVisible(true);
+      
   
       try {
         const response = await fetch("https://s4ds-backend.onrender.com/App/RsvpForm", {
@@ -32,18 +40,21 @@ const RSVPForm = () => {
   
         const data = await response.json();
         console.log("RSVP Submitted Successfully:", data);
-        alert("Your RSVP has been submitted successfully!");
+        setIsPopupVisible(true)
+         //for poping out the form      
+        setTimeout(() => {
+        setIsPopupVisible(false);
+        resetForm();
+        }, 5000); 
+
+
       } catch (error) {
         console.error("Error submitting RSVP:", error);
         alert("Failed to submit RSVP. Please try again later.");
       }
-  
-      // Hide the popup after 5 seconds
-      setTimeout(() => {
-        setIsPopupVisible(false); // Hide the popup
-        setFormData({ name: '', email: '', attending: null }); 
-        e.reset()// Reset form fields
-      }, 5000);
+      
+     
+      
     };
   
     return (
@@ -51,7 +62,7 @@ const RSVPForm = () => {
         <div className="w-full max-w-lg bg-white rounded-xl shadow-lg transform transition-all duration-500 hover:shadow-xl">
           {/* Popup Notification */}
           {isPopupVisible && (
-            <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-4 rounded-md shadow-lg z-50">
+            <div className="fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-4 rounded-md shadow-lg z-50 animate-fade-in">
               <div className="flex items-center space-x-2">
                 <Check className="w-5 h-5 text-white" />
                 <span>Your RSVP has been successfully registered!</span>
