@@ -158,7 +158,7 @@ const Data_Analysis = () => {
                 Below is an example of how to visualize monthly revenue data using a line graph:
               </p>
               <div className="mb-6 h-96 w-full">
-                <Line data={data} options={options} />
+                {/* <Line data={data} options={options} /> */}
               </div>
               <h4 className="font-semibold text-gray-800 mb-2">Explanation:</h4>
               <ul className="list-disc list-inside text-gray-700 space-y-2">

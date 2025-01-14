@@ -12,10 +12,10 @@ import App from './App.jsx';
 const MachineLearning_Page=lazy(()=> import('./Basic/MachineLearning.jsx'))
 const ResourcesPage=lazy(()=>import('./ResourcesPage.jsx'))
 const Basic=lazy(()=>import('./Basic/Basic.jsx'))
-const Data_Analysis=lazy(()=>import('./Basic/Data_Analysis.jsx'))
+// const Data_Analysis=lazy(()=>import('./Basic/Data_Analysis.jsx'))
 const Playground_Page=lazy(()=>import('./Playground/Playgroundd.jsx'))
 const RsvpForm=lazy(()=>import('./RSVP/RSVP.jsx'))
-// import Data_Analysis from './Basic/Data_Analysis.jsx';
+import Data_Analysis from './Basic/Data_Analysis.jsx';
 import { LayoutTemplate } from 'lucide-react';
 // Get the root element from your HTML
 const root = document.getElementById('root');
