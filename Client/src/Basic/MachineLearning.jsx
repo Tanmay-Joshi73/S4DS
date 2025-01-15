@@ -22,7 +22,7 @@ import {
 
 //Importing all the necessary files for the Unsupervised Learning Seaction
 import {DBSCAN, Intro,KClustering,DimensionalityReduction,PCA, TSNE ,AnomalyDetection,SelfOrganizingMaps} from "./UnsupervisedLearning/Unsupervisedlearning";
-
+import {DataDistribution,RelationshipVisualization,CategoricalDataVisualization} from "./VIsualize/visualize"
 
 
 
@@ -322,11 +322,24 @@ const MachineLearning = () => {
           <DimensionalityReduction />
           <PCA />
           <TSNE />
-         
           <AnomalyDetection />
           <SelfOrganizingMaps />
          </div>
-)}
+    
+)
+}
+    {/* console.log(topic.id) */}
+    {topic.id==='visualization' &&(
+      <div>
+          <DataDistribution />
+          <RelationshipVisualization />
+          <CategoricalDataVisualization />
+
+      </div>
+    )
+    
+    }
+    
 
 
             {/* Existing Content */}
