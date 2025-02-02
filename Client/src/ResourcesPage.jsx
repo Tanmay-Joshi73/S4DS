@@ -5,7 +5,7 @@ import { Book, Video, Code, Download, ExternalLink, BookOpen, FileText, Github, 
 import{ useState, useEffect } from 'react';
 const ResourcesPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden">
       {/* Hero Section with new color scheme */}
       <div className="bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-20">
         <div className="container mx-auto px-6">
@@ -167,21 +167,24 @@ const NewsSection = () => {
       const response = await fetch(url);
       const data = await response.json();
 
-      // Log the entire response to check what we're receiving
-      console.log(data);
+      // Filter out news articles without images
+      const filteredNews = data.news.filter(article => article.image);
 
-      // Define AI-related keywords
-      const aiKeywords = ['AI'];
+      // Ensure we have at least 6 articles with images, replacing those without images
+      const finalNews = [];
+      for (let i = 0; i < data.news.length && finalNews.length < 6; i++) {
+        const article = data.news[i];
 
-      // Filter news based on AI-related terms
-      const filteredNews = data.news.filter(article => {
-        return aiKeywords.some(keyword =>
-          article.title.toLowerCase().includes(keyword) ||
-          article.description.toLowerCase().includes(keyword)
-        );
-      });
+        // If the article doesn't have an image, replace it with one that does
+        if (article.image) {
+          finalNews.push(article);
+        } else if (filteredNews.length > 0) {
+          // Take a news article with an image from the filtered list
+          finalNews.push(filteredNews.shift());
+        }
+      }
 
-      setNews(filteredNews);
+      setNews(finalNews);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching news:', error);
@@ -215,7 +218,7 @@ const NewsSection = () => {
             >
               <div className="relative">
                 <img
-                  src={article.image || '/api/placeholder/400/225'}
+                  src={article.image}
                   alt={article.title || 'No image available'}
                   className="w-full h-56 object-cover"
                 />
